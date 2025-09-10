@@ -1,0 +1,28 @@
+🔐 CREDENCIAIS DE LOGIN
+
+👑 ADMINISTRAÇÃO
+
+1. Super Administrador (CeoControl)
+Email: superadmin@control.com
+Senha: admin123
+Role: superadmin
+Permissões: Acesso completo ao sistema (dashboard, users, reports, settings, analytics, system, backup)
+
+2. Administrador (Desenvolvedores)
+Email: admin@control.com
+Senha: 123456
+Role: admin
+Permissões: Dashboard, users, reports, settings, analytics
+
+3. Gerente
+Email: manager@control.com
+Senha: manager123
+Role: manager
+Permissões: Dashboard, users, reports, analytics (sem acesso a logs e configurações avançadas)
+
+👤 USUÁRIOS PADRÃO
+4. Usuário Padrão
+Email: user@control.com
+Senha: user123
+Role: user
+Permissões: Dashboard e reports básicos
