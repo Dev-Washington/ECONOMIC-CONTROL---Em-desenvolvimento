@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTROL - Registro</title>
+    <link rel="stylesheet" href="Register.css">
+    <link rel="favicon.io" href="">
+    <link rel="shortcut icon" href="../../IMG_CODE/LOGO_control.jpg" type="image/jpeg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="register-panel">
+            <h1 class="register-title">Criar Conta</h1>
+            
+            <div class="social-login">
+                <button class="social-btn google-btn" onclick="registerWithGoogle()" title="Registrar com Google">
+                    <img src="../../IMG_CODE/google.png" class="fab fab-linkedin" alt="image LinkedIn">
+                </button>
+                <button class="social-btn github-btn" onclick="registerWithGithub()" title="Registrar com GitHub">
+                    <img src="../../IMG_CODE/GITHUB.png" class="fab fab-linkedin" alt="image LinkedIn">
+                </button>
+                <button class="social-btn linkedin-btn" onclick="registerWithLinkedin()" title="Registrar com LinkedIn">
+                    <img src="../../IMG_CODE/LinkedIn.png" class="fab fab-linkedin" alt="image LinkedIn">
+                </button>
+            </div>
+            
+            <p class="separator">ou continue com</p>
+            
+            <form class="register-form" id="registerForm">
+                <div class="input-group">
+                    <label for="regName">Nome Completo</label>
+                    <input type="text" id="regName" name="name" placeholder="Digite seu nome completo" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="email" placeholder="Digite seu email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="regPassword">Senha</label>
+                    <div class="password-container">
+                        <input type="password" id="regPassword" name="password" placeholder="Digite sua senha" required>
+                        <img src="../../IMG_CODE/olho senha.png" alt="Mostrar senha" class="password-toggle" onclick="togglePassword('regPassword')">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="regConfirmPassword">Confirmar Senha</label>
+                    <div class="password-container">
+                        <input type="password" id="regConfirmPassword" name="confirmPassword" placeholder="Confirme sua senha" required>
+                        <img src="../../IMG_CODE/olho senha.png" alt="Mostrar senha" class="password-toggle" onclick="togglePassword('regConfirmPassword')">
+                    </div>
+                </div>
+                
+                <div class="register-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="terms" required>
+                        <span class="checkmark"></span>
+                        Aceito os <a href="#" class="terms-link">termos de uso</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="register-btn">Criar Conta</button>
+            </form>
+        </div>
+        
+        <div class="welcome-panel">
+            <div class="logo">
+                <img src="../../IMG_CODE/LOGO_control.jpg" alt="CONTROL" class="logo-img">
+            </div>
+            
+            <div class="welcome-content register-bottom">
+                <h2>Já tem uma conta?</h2>
+                <p>Faça login para continuar</p>
+                <button class="login-btn" onclick="window.location.href = '../Login/Login.html'">Fazer Login</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="Register.js"></script>
+</body>
+</html>

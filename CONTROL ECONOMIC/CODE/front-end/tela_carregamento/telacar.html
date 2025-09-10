@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregando...</title>
+    <link rel="stylesheet" href="telacar.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #212121;
+        }
+    </style>
+    <script>
+        (function() {
+            // Lê o parâmetro "to" para saber para onde redirecionar após o carregamento
+            const params = new URLSearchParams(window.location.search);
+            const target = params.get('to') || '../tela_principal1/principal.html';
+            const delayMs = Number(params.get('delay')) || 4000;
+            window.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    window.location.href = target;
+                }, delayMs);
+            });
+        })();
+    </script>
+    <!-- From Uiverse.io by alexruix -->
+</head>
+<body>
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+</html>

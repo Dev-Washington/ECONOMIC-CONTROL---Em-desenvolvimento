@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTROL - Esqueci a Senha</title>
+    <link rel="stylesheet" href="senha.css">
+    <link rel="shortcut icon" href="../../IMG_CODE/LOGO_control.jpg" type="image/jpeg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="forgot-password-panel">
+            <h1 class="forgot-password-title">Esqueci a Senha</h1>
+            
+            <div class="forgot-password-content">
+                <p class="description">Digite seu email para receber um link de recuperação de senha.</p>
+                
+                <form class="forgot-password-form" id="forgotPasswordForm">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                    </div>
+                    
+                    <button type="submit" class="send-email-btn">Enviar Email</button>
+                </form>
+                
+                <div class="back-to-login">
+                    <p>Lembrou da senha?</p>
+                    <button class="back-btn" onclick="goToLogin()">Voltar ao Login</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="welcome-panel">
+            <div class="logo">
+                <img src="../../IMG_CODE/LOGO_control.jpg" alt="CONTROL" class="logo-img">
+            </div>
+            
+            <div class="welcome-content">
+                <h2>Recuperação de Senha</h2>
+                <p>Não se preocupe, isso acontece com todos!</p>
+                <div class="help-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>Verifique sua caixa de entrada e spam</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="senha.js"></script>
+</body>
+</html>

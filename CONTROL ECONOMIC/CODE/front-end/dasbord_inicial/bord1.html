@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="bord1-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTROL - Dashboard</title>
+    <link rel="stylesheet" href="bord1.css">
+    <link rel="shortcut icon" href="../../IMG_CODE/LOGO_control.jpg" type="image/jpeg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="../../IMG_CODE/LOGO_control.jpg" alt="CONTROL" class="brand-logo">
+                <span class="brand-name">CONTROL</span>
+                </div>
+            <nav class="menu">
+                <a class="menu-item active" href="#" data-section="dashboard"><i class="fas fa-gauge"></i> Dashboard</a>
+                <a class="menu-item" href="#" data-section="transactions"><i class="fas fa-exchange-alt"></i> Transações</a>
+                <a class="menu-item" href="#" data-section="budgets"><i class="fas fa-wallet"></i> Orçamentos</a>
+                <a class="menu-item" href="#" data-section="tips"><i class="fas fa-lightbulb"></i> Dicas</a>
+                <a class="menu-item" href="#" data-section="goals">
+                    <svg class="goal-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1v6M12 17v6M23 12h-6M7 12H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Metas
+                </a>
+                <a class="menu-item" href="#" data-section="reports"><i class="fas fa-chart-line"></i> Relatórios</a>
+            </nav>
+        </aside>
+
+        <!-- Main area -->
+        <main class="main">
+            <!-- Header -->
+            <header class="topbar">
+                <div class="search-bar">
+                    <img src="../../IMG_CODE/lupa.png" class="Lupa" alt="Lupa Pesquisa">
+                    <input type="text" placeholder="Search" class="search-input">
+                </div>
+                <div class="userbar">
+                    <button class="icon-btn" title="Teste Modal" onclick="showAddTransactionModal()" style="background: #4CAF50; color: white; margin-right: 10px;">Transação Rapida</button>
+                    <button class="icon-btn" title="Notificações"><i class="far fa-bell"></i></button>
+                    <div class="user">
+                        <img id="userAvatar" src="../../IMG_CODE/pers1.png" alt="Usuário" class="avatar">
+                        <div class="user-info">
+                            <strong id="userName">Admin</strong>
+                            <small id="userEmail">admin@control.com</small>
+                        </div>
+                        <button class="icon-btn" title="Sair" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="section-dashboard" class="section active">
+            <div class="kpis container">
+                <div class="kpi-card">
+                    <div class="kpi-head">Saldo Atual</div>
+                    <div class="kpi-value" id="kpiBalance">R$ 2.450,00</div>
+                    <div class="kpi-sub">+12% este mês</div>
+                        </div>
+                <div class="kpi-card">
+                    <div class="kpi-head">Receitas</div>
+                    <div class="kpi-value" id="kpiIncome">R$ 3.200,00</div>
+                    <div class="kpi-sub">+8% este mês</div>
+                        </div>
+                <div class="kpi-card">
+                    <div class="kpi-head">Despesas</div>
+                    <div class="kpi-value" id="kpiExpenses">R$ 1.890,00</div>
+                    <div class="kpi-sub">-5% este mês</div>
+                    </div>
+                <div class="kpi-card">
+                    <div class="kpi-head">Economia</div>
+                    <div class="kpi-value" id="kpiSavings">R$ 560,00</div>
+                    <div class="kpi-sub">+15% este mês</div>
+                        </div>
+                    </div>
+                    
+            <!-- Charts Section -->
+            <section class="charts-section container">
+                <div class="charts-grid">
+                    <div class="card small">
+                        <h3>Gastos por Categoria</h3>
+                        <canvas id="expensesCategoryChart" height="120"></canvas>
+                        </div>
+                    <div class="card small">
+                        <h3>Orçamento Mensal</h3>
+                        <canvas id="budgetChart" height="120"></canvas>
+                        </div>
+                    <div class="card small">
+                        <h3>Dicas do Dia</h3>
+                        <div class="dashboard-tips">
+                            <div class="dashboard-tip">
+                                <div class="tip-icon">💡</div>
+                                <div class="tip-text">
+                                    <p>Regra 50/30/20: 50% necessidades, 30% desejos, 20% poupança</p>
+                    </div>
+                        </div>
+                            <div class="dashboard-tip">
+                                <div class="tip-icon">📊</div>
+                                <div class="tip-text">
+                                    <p>Automatize suas economias com transferências automáticas</p>
+                        </div>
+                    </div>
+                            <div class="dashboard-tip">
+                                <div class="tip-icon">🎯</div>
+                                <div class="tip-text">
+                                    <p>Economize R$ 10/dia = R$ 3.650/ano</p>
+                </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Transactions Section -->
+            <section class="transactions-section container">
+                <div class="card toolbar">
+                    <div class="toolbar-left">
+                        <h3>Transações Recentes</h3>
+                    </div>
+                    <div class="toolbar-right">
+                        <div class="search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Buscar transação...">
+                    </div>
+                        <button class="btn btn-primary" onclick="showAddTransactionModal()">
+                            <i class="fas fa-plus"></i> Nova Transação
+                        </button>
+                    </div>
+                </div>
+                <div class="card table-card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Produtos</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Tipo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody">
+                            <tr>
+                                <td>Salário</td>
+                                <td>Renda</td>
+                                <td>5 Dez, 2024</td>
+                                <td>R$ 3.200,00</td>
+                                <td><span class="badge success">Receita</span></td>
+                                <td>
+                                    <button class="btn-icon" onclick="editTransaction(1)" title="Editar transação"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="deleteTransaction(1)" title="Excluir transação"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Supermercado</td>
+                                <td>Alimentação</td>
+                                <td>4 Dez, 2024</td>
+                                <td>R$ 180,00</td>
+                                <td><span class="badge danger">Despesa</span></td>
+                                <td>
+                                    <button class="btn-icon" onclick="editTransaction(2)" title="Editar transação"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="deleteTransaction(2)" title="Excluir transação"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Conta de Luz</td>
+                                <td>Utilidades</td>
+                                <td>3 Dez, 2024</td>
+                                <td>R$ 95,00</td>
+                                <td><span class="badge danger">Despesa</span></td>
+                                <td>
+                                    <button class="btn-icon" onclick="editTransaction(3)" title="Editar transação"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="deleteTransaction(3)" title="Excluir transação"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            </section>
+
+            <!-- Transactions Section -->
+            <section id="section-transactions" class="section">
+                <div class="container">
+                    <div class="card toolbar">
+                        <div class="toolbar-left"><h3>Todas as Transações</h3></div>
+                        <div class="toolbar-right">
+                            <div class="search"><i class="fas fa-search"></i><input type="text" placeholder="Buscar transação..."></div>
+                            <select class="filter-select" title="Filtrar por categoria">
+                                <option value="">Todas as categorias</option>
+                                <option value="manutencao">Manutenção</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="utilidades">Utilidades</option>
+                                <option value="renda">Renda</option>
+                        </select>
+                            <button class="btn btn-primary" onclick="showAddTransactionModal()">
+                                <i class="fas fa-plus"></i> Nova Transação
+                        </button>
+                    </div>
+                </div>
+                    <div class="card table-card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Valor</th>
+                                    <th>Tipo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allTransactionsBody">
+                                <tr>
+                                    <td>05/12/2024</td>
+                                    <td>Salário</td>
+                                    <td>Renda</td>
+                                    <td>R$ 3.200,00</td>
+                                    <td><span class="badge success">Receita</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editTransaction(1)" title="Editar transação"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon" onclick="deleteTransaction(1)" title="Excluir transação"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>04/12/2024</td>
+                                    <td>Supermercado</td>
+                                    <td>Alimentação</td>
+                                    <td>R$ 180,00</td>
+                                    <td><span class="badge danger">Despesa</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editTransaction(2)" title="Editar transação"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon" onclick="deleteTransaction(2)" title="Excluir transação"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>03/12/2024</td>
+                                    <td>Conta de Luz</td>
+                                    <td>Utilidades</td>
+                                    <td>R$ 95,00</td>
+                                    <td><span class="badge danger">Despesa</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editTransaction(3)" title="Editar transação"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon" onclick="deleteTransaction(3)" title="Excluir transação"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>02/12/2024</td>
+                                    <td>Freelance</td>
+                                    <td>Renda</td>
+                                    <td>R$ 500,00</td>
+                                    <td><span class="badge success">Receita</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editTransaction(4)" title="Editar transação"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon" onclick="deleteTransaction(4)" title="Excluir transação"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budgets Section -->
+            <section id="section-budgets" class="section">
+                <div class="container">
+                    <div class="card toolbar">
+                        <div class="toolbar-left"><h3>Orçamentos Mensais</h3></div>
+                        <div class="toolbar-right">
+                            <button class="btn btn-primary" onclick="showAddBudgetModal()">
+                                <i class="fas fa-plus"></i> Novo Orçamento
+                    </button>
+                    </div>
+                    </div>
+                    <div class="budgets-grid">
+                        <div class="budget-card">
+                            <div class="budget-header">
+                                <h4>Alimentação</h4>
+                                <span class="budget-amount">R$ 800,00</span>
+                    </div>
+                        <div class="budget-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill progress-fill-75"></div>
+                            </div>
+                                <div class="budget-info">
+                                    <span>Gasto: R$ 600,00</span>
+                                    <span>Restante: R$ 200,00</span>
+                            </div>
+                            </div>
+                            </div>
+                        <div class="budget-card">
+                            <div class="budget-header">
+                                <h4>Transporte</h4>
+                                <span class="budget-amount">R$ 400,00</span>
+                        </div>
+                            <div class="budget-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill progress-fill-60"></div>
+                    </div>
+                                <div class="budget-info">
+                                    <span>Gasto: R$ 240,00</span>
+                                    <span>Restante: R$ 160,00</span>
+                </div>
+                </div>
+                                </div>
+                        <div class="budget-card">
+                            <div class="budget-header">
+                                <h4>Utilidades</h4>
+                                <span class="budget-amount">R$ 300,00</span>
+                            </div>
+                            <div class="budget-progress">
+                                    <div class="progress-bar">
+                                    <div class="progress-fill progress-fill-90"></div>
+                                </div>
+                                <div class="budget-info">
+                                    <span>Gasto: R$ 270,00</span>
+                                    <span>Restante: R$ 30,00</span>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="budget-card">
+                            <div class="budget-header">
+                                <h4>Lazer</h4>
+                                <span class="budget-amount">R$ 200,00</span>
+                            </div>
+                        <div class="budget-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill progress-fill-45"></div>
+                                </div>
+                                <div class="budget-info">
+                                    <span>Gasto: R$ 90,00</span>
+                                    <span>Restante: R$ 110,00</span>
+                            </div>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+            </section>
+
+            <!-- Tips Section -->
+            <section id="section-tips" class="section">
+                <div class="container">
+                    <div class="card toolbar">
+                        <div class="toolbar-left"><h3>Dicas Financeiras</h3></div>
+                        <div class="toolbar-right">
+                            <button class="btn btn-primary" onclick="refreshTips()">
+                                <i class="fas fa-refresh"></i> Atualizar Dicas
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-content">
+                                <h4>💡 Dica do Dia</h4>
+                                <p>Passe o mouse para ver uma dica incrível!</p>
+                                <div class="tip-hover">
+                                    <p>Regra dos 50/30/20: 50% para necessidades, 30% para desejos e 20% para poupança.</p>
+                                    <span>Saiba mais >></span>
+                                </div>
+                                    </div>
+                                </div>
+                        <div class="tip-card">
+                            <div class="tip-content">
+                                <h4>📊 Economia Inteligente</h4>
+                                <p>Hover me to get awesome result</p>
+                                <div class="tip-hover">
+                                    <p>Automatize suas economias: configure transferências automáticas para sua conta poupança.</p>
+                                    <span>More about >></span>
+                            </div>
+                                </div>
+                                    </div>
+                        <div class="tip-card">
+                            <div class="tip-content">
+                                <h4>🎯 Meta Financeira</h4>
+                                <p>Clique para descobrir o segredo!</p>
+                                <div class="tip-hover">
+                                    <p>Comece pequeno: economize R$ 10 por dia e terá R$ 3.650 no final do ano!</p>
+                                    <span>Descubra mais >></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals Section -->
+            <section id="section-goals" class="section">
+                <div class="container">
+                    <div class="card toolbar">
+                        <div class="toolbar-left">
+                            <h3>Metas Financeiras</h3>
+                </div>
+                        <div class="toolbar-right">
+                            <button class="btn btn-primary" onclick="showAddGoalModal()">
+                                <i class="fas fa-plus"></i> Nova Meta
+                        </button>
+                        </div>
+                        </div>
+                    <div class="goals-grid">
+                        <div class="goal-card">
+                            <div class="goal-header">
+                                <h4>Reserva de Emergência</h4>
+                                <span class="goal-target">R$ 10.000,00</span>
+                    </div>
+                            <div class="goal-progress">
+                                <div class="progress-circle">
+                                    <svg class="progress-ring" width="80" height="80">
+                                        <circle class="progress-ring-circle" stroke="#e5e7eb" stroke-width="8" fill="transparent" r="32" cx="40" cy="40"/>
+                                        <circle class="progress-ring-circle" stroke="#4CAF50" stroke-width="8" fill="transparent" r="32" cx="40" cy="40" style="stroke-dasharray: 201; stroke-dashoffset: 50;"/>
+                                    </svg>
+                                    <span class="progress-text">75%</span>
+                        </div>
+                                <div class="goal-info">
+                                    <span>Arrecadado: R$ 7.500,00</span>
+                                    <span>Faltam: R$ 2.500,00</span>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="goal-card">
+                            <div class="goal-header">
+                                <h4>Viagem para Europa</h4>
+                                <span class="goal-target">R$ 15.000,00</span>
+                        </div>
+                            <div class="goal-progress">
+                                <div class="progress-circle">
+                                    <svg class="progress-ring" width="80" height="80">
+                                        <circle class="progress-ring-circle" stroke="#e5e7eb" stroke-width="8" fill="transparent" r="32" cx="40" cy="40"/>
+                                        <circle class="progress-ring-circle" stroke="#2196F3" stroke-width="8" fill="transparent" r="32" cx="40" cy="40" style="stroke-dasharray: 201; stroke-dashoffset: 110;"/>
+                                    </svg>
+                                    <span class="progress-text">45%</span>
+                    </div>
+                                <div class="goal-info">
+                                    <span>Arrecadado: R$ 6.750,00</span>
+                                    <span>Faltam: R$ 8.250,00</span>
+                        </div>
+                        </div>
+                    </div>
+                        <div class="goal-card">
+                            <div class="goal-header">
+                                <h4>Novo Carro</h4>
+                                <span class="goal-target">R$ 50.000,00</span>
+                </div>
+                            <div class="goal-progress">
+                                <div class="progress-circle">
+                                    <svg class="progress-ring" width="80" height="80">
+                                        <circle class="progress-ring-circle" stroke="#e5e7eb" stroke-width="8" fill="transparent" r="32" cx="40" cy="40"/>
+                                        <circle class="progress-ring-circle" stroke="#FF9800" stroke-width="8" fill="transparent" r="32" cx="40" cy="40" style="stroke-dasharray: 201; stroke-dashoffset: 160;"/>
+                                    </svg>
+                                    <span class="progress-text">20%</span>
+                </div>
+                                <div class="goal-info">
+                                    <span>Arrecadado: R$ 10.000,00</span>
+                                    <span>Faltam: R$ 40.000,00</span>
+                    </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="section-reports" class="section">
+                <div class="container">
+                    <div class="reports-grid">
+                        <div class="card small">
+                            <h3>Vendas Mensais</h3>
+                            <canvas id="monthlySalesChart" height="180"></canvas>
+                </div>
+                        <div class="card small">
+                            <h3>Receita por Categoria</h3>
+                            <canvas id="revenueByCatChart" height="180"></canvas>
+                        </div>
+                        <div class="card small">
+                            <h3>Comparativo Anual</h3>
+                            <canvas id="yearlyComparisonChart" height="180"></canvas>
+                        </div>
+                        <div class="card small">
+                            <h3>Distribuição de Lucros</h3>
+                            <canvas id="profitDistributionChart" height="180"></canvas>
+                    </div>
+                                </div>
+                            </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="section-messages" class="section">
+                <div class="container">
+                    <div class="card toolbar">
+                        <div class="toolbar-left"><h3>Mensagens</h3></div>
+                        <div class="toolbar-right"><button class="btn btn-secondary">Nova Mensagem</button></div>
+                                </div>
+                    <div class="card">
+                        <ul class="message-list">
+                            <li><strong>Suporte</strong> — Seu relatório está pronto. <small>hoje</small></li>
+                            <li><strong>Financeiro</strong> — Fatura #1029 paga. <small>ontem</small></li>
+                            <li><strong>Cliente</strong> — Dúvida sobre entrega. <small>2 dias</small></li>
+                        </ul>
+                            </div>
+                        </div>
+            </section>
+
+            <!-- Customers Section -->
+            <section id="section-customers" class="section">
+                <div class="container">
+                    <div class="card toolbar">
+                        <div class="toolbar-left"><h3>Clientes</h3></div>
+                        <div class="toolbar-right"><button class="btn btn-primary">Novo Cliente</button></div>
+                                </div>
+                    <div class="card table-card">
+                        <table class="table">
+                            <thead>
+                                <tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Última Compra</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>João Silva</td><td>joao@email.com</td><td>(11) 99999-9999</td><td>5 Dez, 2024</td><td><span class="badge success">Ativo</span></td></tr>
+                                <tr><td>Maria Santos</td><td>maria@email.com</td><td>(11) 88888-8888</td><td>3 Dez, 2024</td><td><span class="badge success">Ativo</span></td></tr>
+                                <tr><td>Pedro Costa</td><td>pedro@email.com</td><td>(11) 77777-7777</td><td>1 Dez, 2024</td><td><span class="badge warning">Inativo</span></td></tr>
+                            </tbody>
+                        </table>
+                            </div>
+                        </div>
+            </section>
+        </main>
+                </div>
+                
+    <script>
+        // Navigation functionality
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all menu items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById('section-' + sectionName).classList.add('active');
+            
+            // Add active class to clicked menu item
+            event.target.classList.add('active');
+        }
+
+        // Add click event listeners to menu items
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    showSection(section);
+                });
+            });
+
+            // Initialize charts
+            const expensesCategoryCtx = document.getElementById('expensesCategoryChart');
+            if (expensesCategoryCtx) {
+                new Chart(expensesCategoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Alimentação', 'Transporte', 'Utilidades', 'Lazer', 'Outros'],
+                        datasets: [{
+                            data: [35, 20, 15, 10, 20],
+                            backgroundColor: [
+                                '#4CAF50', // Verde - Alimentação
+                                '#2196F3', // Azul - Transporte
+                                '#FF9800', // Laranja - Utilidades
+                                '#9C27B0', // Roxo - Lazer
+                                '#607D8B'  // Azul acinzentado - Outros
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 2,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 15,
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#ffffff',
+                                bodyColor: '#ffffff',
+                                borderColor: '#4CAF50',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                displayColors: true,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            animateRotate: true,
+                            animateScale: true,
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+            }
+
+            // Budget Chart (Dashboard)
+            const budgetCtx = document.getElementById('budgetChart');
+            if (budgetCtx) {
+                new Chart(budgetCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Alimentação', 'Transporte', 'Utilidades', 'Lazer'],
+                        datasets: [{
+                            label: 'Orçamento',
+                            data: [800, 400, 300, 200],
+                            backgroundColor: 'rgba(76, 175, 80, 0.3)',
+                            borderColor: '#4CAF50',
+                            borderWidth: 1
+                        }, {
+                            label: 'Gasto',
+                            data: [600, 240, 270, 90],
+                            backgroundColor: 'rgba(255, 152, 0, 0.7)',
+                            borderColor: '#FF9800',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#ffffff',
+                                bodyColor: '#ffffff',
+                                borderColor: '#4CAF50',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': R$ ' + context.parsed.y.toLocaleString('pt-BR');
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)',
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 10,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    },
+                                    callback: function(value) {
+                                        return 'R$ ' + value;
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 10,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+            }
+
+            const monthlySalesCtx = document.getElementById('monthlySalesChart');
+            if (monthlySalesCtx) {
+                new Chart(monthlySalesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        datasets: [{
+                            label: 'Vendas (R$)',
+                            data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 32000, 35000, 40000, 38000, 45000],
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#4CAF50',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointHoverBackgroundColor: '#2e7d32',
+                            pointHoverBorderColor: '#ffffff',
+                            pointHoverBorderWidth: 3
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 12,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#ffffff',
+                                bodyColor: '#ffffff',
+                                borderColor: '#4CAF50',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Vendas: R$ ' + context.parsed.y.toLocaleString('pt-BR');
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)',
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    },
+                                    callback: function(value) {
+                                        return 'R$ ' + (value / 1000) + 'k';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+            }
+
+            const revenueByCatCtx = document.getElementById('revenueByCatChart');
+            if (revenueByCatCtx) {
+                new Chart(revenueByCatCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Eletrônicos', 'Roupas', 'Casa', 'Outros', 'Livros', 'Esportes'],
+                        datasets: [{
+                            label: 'Receita (R$)',
+                            data: [45000, 25000, 20000, 10000, 15000, 12000],
+                            backgroundColor: [
+                                '#4CAF50', // Verde principal
+                                '#8BC34A', // Verde claro
+                                '#CDDC39', // Verde amarelado
+                                '#FFC107', // Amarelo
+                                '#FF9800', // Laranja
+                                '#FF5722'  // Vermelho laranja
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            borderSkipped: false,
+                            hoverBackgroundColor: [
+                                '#2e7d32', // Verde escuro
+                                '#689f38', // Verde médio
+                                '#9e9d24', // Verde amarelado escuro
+                                '#f57c00', // Amarelo escuro
+                                '#ef6c00', // Laranja escuro
+                                '#d84315'  // Vermelho escuro
+                            ]
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 12,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#ffffff',
+                                bodyColor: '#ffffff',
+                                borderColor: '#4CAF50',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Receita: R$ ' + context.parsed.y.toLocaleString('pt-BR');
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)',
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    },
+                                    callback: function(value) {
+                                        return 'R$ ' + (value / 1000) + 'k';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+            }
+
+            // Yearly Comparison Chart (Reports)
+            const yearlyComparisonCtx = document.getElementById('yearlyComparisonChart');
+            if (yearlyComparisonCtx) {
+                new Chart(yearlyComparisonCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['2022', '2023', '2024'],
+                        datasets: [{
+                            label: 'Vendas',
+                            data: [280000, 320000, 450000],
+                            backgroundColor: '#4CAF50',
+                            borderColor: '#2e7d32',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }, {
+                            label: 'Custos',
+                            data: [180000, 200000, 280000],
+                            backgroundColor: '#FF5722',
+                            borderColor: '#d84315',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }, {
+                            label: 'Lucro',
+                            data: [100000, 120000, 170000],
+                            backgroundColor: '#FFC107',
+                            borderColor: '#f57c00',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#ffffff',
+                                bodyColor: '#ffffff',
+                                borderColor: '#4CAF50',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': R$ ' + context.parsed.y.toLocaleString('pt-BR');
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)',
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 10,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    },
+                                    callback: function(value) {
+                                        return 'R$ ' + (value / 1000) + 'k';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#666',
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+            }
+
+            // Profit Distribution Chart (Reports)
+            const profitDistributionCtx = document.getElementById('profitDistributionChart');
+            if (profitDistributionCtx) {
+                new Chart(profitDistributionCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Investimento', 'Reserva', 'Dividendos', 'Reinvestimento'],
+                        datasets: [{
+                            data: [40, 25, 20, 15],
+                            backgroundColor: [
+                                '#4CAF50', // Verde - Investimento
+                                '#2196F3', // Azul - Reserva
+                                '#FF9800', // Laranja - Dividendos
+                                '#9C27B0'  // Roxo - Reinvestimento
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 2,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 15,
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 11,
+                                        family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#ffffff',
+                                bodyColor: '#ffffff',
+                                borderColor: '#4CAF50',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                displayColors: true,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            animateRotate: true,
+                            animateScale: true,
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+            }
+        });
+
+        // Financial Management Functions
+        function showAddTransactionModal() {
+            console.log('showAddTransactionModal called'); // Debug log
+            
+            // Create modal for adding transactions
+            const modal = document.createElement('div');
+            modal.className = 'modal show';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Nova Transação</h3>
+                        <button class="modal-close" onclick="closeModal(this)">&times;</button>
+                    </div>
+                    <form onsubmit="addTransaction(event)">
+                        <div class="form-group">
+                            <label>Produtos:</label>
+                            <input type="text" name="description" placeholder="Ex: Notebook, Celular, Capinha" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Valor:</label>
+                            <input type="number" name="amount" step="0.01" placeholder="0,00" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria:</label>
+                            <select name="category" required>
+                                <option value="">Selecione uma categoria...</option>
+                                <option value="manutencao">Manutenção</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="utilidades">Utilidades</option>
+                                <option value="lazer">Lazer</option>
+                                <option value="saude">Saúde</option>
+                                <option value="educacao">Educação</option>
+                                <option value="vestuario">Vestuário</option>
+                                <option value="renda">Renda</option>
+                                <option value="investimento">Investimento</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo:</label>
+                            <select name="type" required>
+                                <option value="expense">Despesa</option>
+                                <option value="income">Receita</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Data:</label>
+                            <input type="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Método de Pagamento:</label>
+                            <select name="paymentMethod">
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="cartao_debito">Cartão de Débito</option>
+                                <option value="cartao_credito">Cartão de Crédito</option>
+                                <option value="pix">PIX</option>
+                                <option value="transferencia">Transferência</option>
+                                <option value="boleto">Boleto</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Observações (opcional):</label>
+                            <textarea name="notes" rows="2" placeholder="Adicione observações sobre esta transação..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="closeModal(this)" class="btn btn-secondary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar Transação</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // Force show the modal
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function addTransaction(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const transaction = {
+                id: Date.now(),
+                description: formData.get('description'),
+                amount: parseFloat(formData.get('amount')),
+                category: formData.get('category'),
+                type: formData.get('type'),
+                date: formData.get('date'),
+                paymentMethod: formData.get('paymentMethod'),
+                notes: formData.get('notes'),
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            let transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            transactions.push(transaction);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            
+            // Update UI
+            updateTransactionsTable();
+            updateKPIs();
+            closeModal(event.target.closest('.modal'));
+            
+            // Show success message
+            showNotification('Transação adicionada com sucesso!', 'success');
+        }
+
+        function updateTransactionsTable() {
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            const tbody = document.getElementById('transactionsBody');
+            if (tbody) {
+                tbody.innerHTML = transactions.slice(-5).map(t => `
+                    <tr>
+                        <td>${t.description}</td>
+                        <td>${t.category}</td>
+                        <td>${new Date(t.date).toLocaleDateString('pt-BR')}</td>
+                        <td>R$ ${t.amount.toFixed(2)}</td>
+                        <td><span class="badge ${t.type === 'income' ? 'success' : 'danger'}">${t.type === 'income' ? 'Receita' : 'Despesa'}</span></td>
+                        <td>
+                            <button class="btn-icon" onclick="editTransaction(${t.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn-icon" onclick="deleteTransaction(${t.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function updateKPIs() {
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            const currentMonth = new Date().getMonth();
+            const currentYear = new Date().getFullYear();
+            
+            const monthlyTransactions = transactions.filter(t => {
+                const date = new Date(t.date);
+                return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+            });
+            
+            const income = monthlyTransactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+            const expenses = monthlyTransactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+            const balance = income - expenses;
+            const savings = income * 0.2; // 20% savings rate
+            
+            document.getElementById('kpiBalance').textContent = `R$ ${balance.toFixed(2)}`;
+            document.getElementById('kpiIncome').textContent = `R$ ${income.toFixed(2)}`;
+            document.getElementById('kpiExpenses').textContent = `R$ ${expenses.toFixed(2)}`;
+            document.getElementById('kpiSavings').textContent = `R$ ${savings.toFixed(2)}`;
+        }
+
+        function editTransaction(id) {
+            // Implementation for editing transactions
+            console.log('Edit transaction:', id);
+        }
+
+        function deleteTransaction(id) {
+            if (confirm('Tem certeza que deseja excluir esta transação?')) {
+                let transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+                transactions = transactions.filter(t => t.id !== id);
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+                updateTransactionsTable();
+                updateKPIs();
+            }
+        }
+
+        function showAddBudgetModal() {
+            console.log('showAddBudgetModal called'); // Debug log
+            
+            // Create modal for adding budgets
+            const modal = document.createElement('div');
+            modal.className = 'modal show';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Novo Orçamento</h3>
+                        <button class="modal-close" onclick="closeModal(this)">&times;</button>
+                    </div>
+                    <form onsubmit="addBudget(event)">
+                        <div class="form-group">
+                            <label>Categoria:</label>
+                            <select name="category" required>
+                                <option value="">Selecione uma categoria...</option>
+                                <option value="manutencao">Manutenção</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="utilidades">Utilidades</option>
+                                <option value="lazer">Lazer</option>
+                                <option value="saude">Saúde</option>
+                                <option value="educacao">Educação</option>
+                                <option value="vestuario">Vestuário</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Valor do Orçamento:</label>
+                            <input type="number" name="budgetAmount" step="0.01" placeholder="0,00" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Período:</label>
+                            <select name="period" required>
+                                <option value="mensal">Mensal</option>
+                                <option value="semanal">Semanal</option>
+                                <option value="anual">Anual</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mês de Início:</label>
+                            <input type="month" name="startMonth" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição (opcional):</label>
+                            <textarea name="description" rows="3" placeholder="Adicione uma descrição para este orçamento..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="closeModal(this)" class="btn btn-secondary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Criar Orçamento</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // Force show the modal
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function addBudget(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const budget = {
+                id: Date.now(),
+                category: formData.get('category'),
+                amount: parseFloat(formData.get('budgetAmount')),
+                period: formData.get('period'),
+                startMonth: formData.get('startMonth'),
+                description: formData.get('description'),
+                spent: 0,
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            let budgets = JSON.parse(localStorage.getItem('budgets') || '[]');
+            budgets.push(budget);
+            localStorage.setItem('budgets', JSON.stringify(budgets));
+            
+            // Update UI
+            updateBudgetsDisplay();
+            closeModal(event.target.closest('.modal'));
+            
+            // Show success message
+            showNotification('Orçamento criado com sucesso!', 'success');
+        }
+
+        function updateBudgetsDisplay() {
+            const budgets = JSON.parse(localStorage.getItem('budgets') || '[]');
+            const budgetsGrid = document.querySelector('.budgets-grid');
+            if (budgetsGrid && budgets.length > 0) {
+                budgetsGrid.innerHTML = budgets.map(budget => {
+                    const spentPercentage = (budget.spent / budget.amount) * 100;
+                    const remaining = budget.amount - budget.spent;
+                    const progressClass = spentPercentage > 90 ? 'progress-fill-danger' : 
+                                        spentPercentage > 75 ? 'progress-fill-warning' : 'progress-fill-success';
+                    
+                    return `
+                        <div class="budget-card">
+                            <div class="budget-header">
+                                <h4>${budget.category.charAt(0).toUpperCase() + budget.category.slice(1)}</h4>
+                                <span class="budget-amount">R$ ${budget.amount.toFixed(2)}</span>
+    </div>
+                            <div class="budget-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill ${progressClass}" style="width: ${Math.min(spentPercentage, 100)}%"></div>
+                                </div>
+                                <div class="budget-info">
+                                    <span>Gasto: R$ ${budget.spent.toFixed(2)}</span>
+                                    <span>Restante: R$ ${remaining.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            ${budget.description ? `<div class="budget-description">${budget.description}</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function showAddGoalModal() {
+            console.log('showAddGoalModal called'); // Debug log
+            
+            // Create modal for adding goals
+            const modal = document.createElement('div');
+            modal.className = 'modal show';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Nova Meta Financeira</h3>
+                        <button class="modal-close" onclick="closeModal(this)">&times;</button>
+                    </div>
+                    <form onsubmit="addGoal(event)">
+                        <div class="form-group">
+                            <label>Nome da Meta:</label>
+                            <input type="text" name="goalName" placeholder="Ex: Reserva de Emergência" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Valor Alvo:</label>
+                            <input type="number" name="targetAmount" step="0.01" placeholder="0,00" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Valor Atual:</label>
+                            <input type="number" name="currentAmount" step="0.01" value="0" placeholder="0,00">
+                        </div>
+                        <div class="form-group">
+                            <label>Data Limite:</label>
+                            <input type="date" name="deadline" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Meta:</label>
+                            <select name="goalType" required>
+                                <option value="">Selecione o tipo...</option>
+                                <option value="emergencia">Reserva de Emergência</option>
+                                <option value="viagem">Viagem</option>
+                                <option value="veiculo">Veículo</option>
+                                <option value="casa">Casa/Imóvel</option>
+                                <option value="investimento">Investimento</option>
+                                <option value="educacao">Educação</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição (opcional):</label>
+                            <textarea name="description" rows="3" placeholder="Adicione uma descrição para esta meta..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="closeModal(this)" class="btn btn-secondary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Criar Meta</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // Force show the modal
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function addGoal(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const goal = {
+                id: Date.now(),
+                name: formData.get('goalName'),
+                targetAmount: parseFloat(formData.get('targetAmount')),
+                currentAmount: parseFloat(formData.get('currentAmount')),
+                deadline: formData.get('deadline'),
+                type: formData.get('goalType'),
+                description: formData.get('description'),
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            let goals = JSON.parse(localStorage.getItem('goals') || '[]');
+            goals.push(goal);
+            localStorage.setItem('goals', JSON.stringify(goals));
+            
+            // Update UI
+            updateGoalsDisplay();
+            closeModal(event.target.closest('.modal'));
+            
+            // Show success message
+            showNotification('Meta criada com sucesso!', 'success');
+        }
+
+        function updateGoalsDisplay() {
+            const goals = JSON.parse(localStorage.getItem('goals') || '[]');
+            const goalsGrid = document.querySelector('.goals-grid');
+            if (goalsGrid && goals.length > 0) {
+                goalsGrid.innerHTML = goals.map(goal => {
+                    const progress = (goal.currentAmount / goal.targetAmount) * 100;
+                    const remaining = goal.targetAmount - goal.currentAmount;
+                    return `
+                        <div class="goal-card">
+                            <div class="goal-header">
+                                <h4>${goal.name}</h4>
+                                <span class="goal-target">R$ ${goal.targetAmount.toFixed(2)}</span>
+    </div>
+                            <div class="goal-progress">
+                                <div class="progress-circle">
+                                    <svg class="progress-ring" width="80" height="80">
+                                        <circle class="progress-ring-circle" stroke="#e5e7eb" stroke-width="8" fill="transparent" r="32" cx="40" cy="40"/>
+                                        <circle class="progress-ring-circle" stroke="#4CAF50" stroke-width="8" fill="transparent" r="32" cx="40" cy="40" style="stroke-dasharray: 201; stroke-dashoffset: ${201 - (progress * 2.01)};"/>
+                                    </svg>
+                                    <span class="progress-text">${Math.round(progress)}%</span>
+                                </div>
+                                <div class="goal-info">
+                                    <span>Arrecadado: R$ ${goal.currentAmount.toFixed(2)}</span>
+                                    <span>Faltam: R$ ${remaining.toFixed(2)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function refreshTips() {
+            // Array de dicas financeiras
+            const tips = [
+                {
+                    title: "💡 Dica do Dia",
+                    preview: "Passe o mouse para ver uma dica incrível!",
+                    content: "Regra dos 50/30/20: 50% para necessidades, 30% para desejos e 20% para poupança.",
+                    action: "Saiba mais >>"
+                },
+                {
+                    title: "📊 Economia Inteligente",
+                    preview: "Hover me to get awesome result",
+                    content: "Automatize suas economias: configure transferências automáticas para sua conta poupança.",
+                    action: "More about >>"
+                },
+                {
+                    title: "🎯 Meta Financeira",
+                    preview: "Clique para descobrir o segredo!",
+                    content: "Comece pequeno: economize R$ 10 por dia e terá R$ 3.650 no final do ano!",
+                    action: "Descubra mais >>"
+                },
+                {
+                    title: "💰 Investimento",
+                    preview: "Passe o mouse para ver a dica!",
+                    content: "Diversifique seus investimentos: não coloque todos os ovos na mesma cesta.",
+                    action: "Investir agora >>"
+                },
+                {
+                    title: "📈 Crescimento",
+                    preview: "Hover para ver o resultado!",
+                    content: "Juros compostos são a oitava maravilha do mundo. Comece a investir hoje!",
+                    action: "Começar hoje >>"
+                },
+                {
+                    title: "🛡️ Proteção",
+                    preview: "Passe o mouse para descobrir!",
+                    content: "Tenha sempre uma reserva de emergência equivalente a 6 meses de gastos.",
+                    action: "Proteger agora >>"
+                }
+            ];
+
+            // Seleciona 3 dicas aleatórias
+            const shuffled = tips.sort(() => 0.5 - Math.random());
+            const selectedTips = shuffled.slice(0, 3);
+
+            // Atualiza o HTML
+            const tipsGrid = document.querySelector('.tips-grid');
+            if (tipsGrid) {
+                tipsGrid.innerHTML = selectedTips.map(tip => `
+                    <div class="tip-card">
+                        <div class="tip-content">
+                            <h4>${tip.title}</h4>
+                            <p>${tip.preview}</p>
+                            <div class="tip-hover">
+                                <p>${tip.content}</p>
+                                <span>${tip.action}</span>
+                </div>
+        </div>
+    </div>
+                `).join('');
+            }
+        }
+
+        function closeModal(button) {
+            const modal = button.closest('.modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Initialize data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTransactionsTable();
+            updateKPIs();
+            updateGoalsDisplay();
+            
+            // Test modal functionality
+            console.log('Page loaded, testing modal functions...');
+            console.log('showAddTransactionModal:', typeof showAddTransactionModal);
+            console.log('showAddBudgetModal:', typeof showAddBudgetModal);
+            console.log('showAddGoalModal:', typeof showAddGoalModal);
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('userData');
+                sessionStorage.removeItem('userData');
+                window.location.href = '../Login/Login.html';
+            }
+        }
+    </script>
+</body>
+</html>

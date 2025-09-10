@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTROL - Dashboard Administrativo</title>
+    <link rel="stylesheet" href="AdminDashboard.css">
+    <link rel="shortcut icon" href="../../IMG_CODE/LOGO_control.jpg" type="image/jpeg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-dashboard-container">
+        <!-- Sidebar Administrativa -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="logo logo-clickable" onclick="handleHomeClick()">
+                    <img src="../../IMG_CODE/LOGO_control.jpg" alt="CONTROL" class="logo-img">
+                    <span class="logo-text">ADMIN</span>
+                </div>
+                <button class="sidebar-toggle" onclick="toggleSidebar()" title="Alternar menu lateral" type="button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="javascript:void(0);" class="nav-link" onclick="showSection('overview'); return false;">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Visão Geral</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showSection('users')">
+                            <i class="fas fa-users"></i>
+                            <span>Usuários</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showSection('analytics')">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showSection('reports')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Relatórios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showSection('settings')">
+                            <i class="fas fa-cog"></i>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showSection('logs')">
+                            <i class="fas fa-list-alt"></i>
+                            <span>Logs de Acesso</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="../../IMG_CODE/pers1.png" alt="Admin" class="user-avatar">
+                    <div class="user-info">
+                        <span class="user-name">Desenvolvedores</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()" title="Sair do sistema">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-left">
+                    <h1 class="page-title">Dashboard Administrativo</h1>
+                    <p class="page-subtitle">Painel de controle e gerenciamento do sistema</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <input type="text" placeholder="Pesquisar..." class="search-input" id="globalSearch">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <button class="notification-btn" onclick="showNotifications()" title="Notificações">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationCount">5</span>
+                    </button>
+                    <button class="refresh-btn" onclick="refreshData()" title="Atualizar dados">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Overview Section -->
+            <section id="overview-section" class="content-section active">
+                <!-- Stats Cards -->
+                <div class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-value" id="totalUsers">0</h3>
+                                <p class="stat-label">Total de Usuários</p>
+                                <span class="stat-change positive" id="usersChange">+0%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-value" id="activeUsers">0</h3>
+                                <p class="stat-label">Usuários Ativos</p>
+                                <span class="stat-change positive" id="activeChange">+0%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-value" id="totalRevenue">R$ 0,00</h3>
+                                <p class="stat-label">Receita Total</p>
+                                <span class="stat-change positive" id="revenueChange">+0%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-value" id="systemAlerts">0</h3>
+                                <p class="stat-label">Alertas do Sistema</p>
+                                <span class="stat-change negative" id="alertsChange">+0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Usuários Ativos por Período</h3>
+                            <div class="chart-controls">
+                                <select class="chart-select" id="usersChartPeriod" title="Selecionar período do gráfico de usuários">
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30" selected>Últimos 30 dias</option>
+                                    <option value="90">Últimos 90 dias</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="usersChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Distribuição de Usuários por Role</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="rolesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-section">
+                    <div class="section-header">
+                        <h3>Atividade Recente do Sistema</h3>
+                        <a href="#" class="view-all-link" onclick="showSection('logs')">Ver todos os logs</a>
+                    </div>
+                    
+                    <div class="activity-list" id="recentActivity">
+                        <!-- Atividades serão carregadas via JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users-section" class="content-section">
+                <div class="section-header">
+                    <h3>Gerenciamento de Usuários</h3>
+                    <button class="btn btn-primary" onclick="showAddUserModal()">
+                        <i class="fas fa-plus"></i>
+                        Adicionar Usuário
+                    </button>
+                </div>
+                
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Último Acesso</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Usuários serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="content-section">
+                <div class="section-header">
+                    <h3>Analytics Avançados</h3>
+                    <div class="analytics-controls">
+                        <select class="chart-select" id="analyticsPeriod" title="Selecionar período dos analytics">
+                            <option value="7">Últimos 7 dias</option>
+                            <option value="30" selected>Últimos 30 dias</option>
+                            <option value="90">Últimos 90 dias</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h4>Performance do Sistema</h4>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Uso de Recursos</h4>
+                        <canvas id="resourcesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports-section" class="content-section">
+                <div class="section-header">
+                    <h3>Relatórios Administrativos</h3>
+                    <button class="btn btn-success" onclick="generateReport()">
+                        <i class="fas fa-download"></i>
+                        Gerar Relatório
+                    </button>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card" onclick="generateUserReport()">
+                        <i class="fas fa-users"></i>
+                        <h4>Relatório de Usuários</h4>
+                        <p>Estatísticas e dados dos usuários</p>
+                    </div>
+                    <div class="report-card" onclick="generateSystemReport()">
+                        <i class="fas fa-server"></i>
+                        <h4>Relatório do Sistema</h4>
+                        <p>Performance e logs do sistema</p>
+                    </div>
+                    <div class="report-card" onclick="generateFinancialReport()">
+                        <i class="fas fa-chart-pie"></i>
+                        <h4>Relatório Financeiro</h4>
+                        <p>Dados financeiros e receitas</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section">
+                <div class="section-header">
+                    <h3>Configurações do Sistema</h3>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h4>Configurações Gerais</h4>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="systemName">Nome do Sistema</label>
+                                <input type="text" id="systemName" value="CONTROL" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="sessionTimeout">Timeout de Sessão (horas)</label>
+                                <input type="number" id="sessionTimeout" value="24" class="form-input">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h4>Configurações de Segurança</h4>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="maxLoginAttempts">Máximo de Tentativas de Login</label>
+                                <input type="number" id="maxLoginAttempts" value="5" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordMinLength">Tamanho Mínimo da Senha</label>
+                                <input type="number" id="passwordMinLength" value="6" class="form-input">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logs Section -->
+            <section id="logs-section" class="content-section">
+                <div class="section-header">
+                    <h3>Logs de Acesso</h3>
+                    <div class="logs-controls">
+                        <select class="chart-select" id="logsFilter" title="Filtrar logs por tipo">
+                            <option value="all">Todos</option>
+                            <option value="login_success">Login Sucesso</option>
+                            <option value="login_failed">Login Falhou</option>
+                            <option value="logout">Logout</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="clearLogs()">
+                            <i class="fas fa-trash"></i>
+                            Limpar Logs
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="logs-container">
+                    <table class="logs-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Ação</th>
+                                <th>IP</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsTableBody">
+                            <!-- Logs serão carregados via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para Adicionar Usuário -->
+    <div class="modal" id="addUserModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddUserModal()">&times;</span>
+            <h3>Adicionar Novo Usuário</h3>
+            <form id="addUserForm" class="modal-form">
+                <div class="form-group">
+                    <label for="newUserName">Nome Completo</label>
+                    <input type="text" id="newUserName" required class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="newUserEmail">Email</label>
+                    <input type="email" id="newUserEmail" required class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="newUserPassword">Senha</label>
+                    <input type="password" id="newUserPassword" required class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="newUserRole">Role</label>
+                    <select id="newUserRole" required class="form-input">
+                        <option value="user">Usuário</option>
+                        <option value="manager">Gerente</option>
+                        <option value="admin">Desenvolvedores</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddUserModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar Usuário</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="AdminDashboard.js"></script>
+</body>
+</html>

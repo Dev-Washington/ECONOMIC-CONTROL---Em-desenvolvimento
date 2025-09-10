@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTROL - Login</title>
+    <link rel="stylesheet" href="Login.css">
+    <link rel="favicon.io" href="">
+    <link rel="shortcut icon" href="../../IMG_CODE/LOGO_control.jpg" type="image/jpeg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="login-panel">
+            <h1 class="login-title">Login com</h1>
+            
+            <div class="social-login">
+                <button class="social-btn google-btn" onclick="loginWithGoogle()" title="Entrar com Google">
+                    <img src="../../IMG_CODE/google.png" class="fab fab-google" alt="image google">
+                </button>
+                <button class="social-btn github-btn" onclick="loginWithGithub()" title="Entrar com GitHub">
+                    <img src="../../IMG_CODE/GITHUB.png" class="fab fab-github" alt="image GitHub">
+                </button>
+                <button class="social-btn linkedin-btn" onclick="loginWithLinkedin()" title="Entrar com LinkedIn">
+                    <img src="../../IMG_CODE/LinkedIn.png" class="fab fab-linkedin" alt="image LinkedIn">
+                </button>
+            </div>
+            
+            <p class="separator">ou continue com</p>
+            
+            <form class="login-form" id="loginForm">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Entre com seu email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" placeholder="Entre com sua senha" required>
+                        <img src="../../IMG_CODE/olho senha.png" alt="Mostrar senha" class="password-toggle" onclick="togglePassword('password')">
+                    </div>
+                </div>
+                
+                <div class="login-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember">
+                        <span class="checkmark"></span>
+                        Guarda conta
+                    </label>
+                    <a href="#" class="forgot-password" onclick="forgotPassword()">Esqueceu sua senha?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Entrar</button>
+            </form>
+        </div>
+        
+        <div class="welcome-panel">
+            <div class="logo">
+                <img src="../../IMG_CODE/LOGO_control.jpg" alt="CONTROL" class="logo-img">
+            </div>
+            
+            <div class="welcome-content">
+                <h2>Óla, Bem vindo</h2>
+                <p>Crie sua conta agora</p>
+                <button class="create-account-btn" onclick="testRedirect()">Criar conta</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="Login.js"></script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+/* Reset e configurações básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f0f;
+    color: #ffffff;
+}
+
+/* Container principal */
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+}
+
+/* Header */
+.main-header {
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Navegação */
+.main-nav {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #fff;
+    background: #333;
+}
+
+.nav-link.active {
+    color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+/* Ações do header */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.logout-btn {
+    background: #333;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-btn:hover {
+    background: #f44336;
+    color: #fff;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    width: 100%;
+}
+
+/* Seção de boas-vindas */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.welcome-section h1 {
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #4CAF50, #66bb6a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.welcome-section p {
+    font-size: 20px;
+    color: #888;
+}
+
+/* Grid de funcionalidades */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.feature-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-color: #4CAF50;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    background: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 32px;
+    color: white;
+}
+
+.feature-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.feature-card p {
+    color: #888;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.feature-btn {
+    background: #4CAF50;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.feature-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Ações rápidas */
+.quick-actions {
+    margin-bottom: 48px;
+}
+
+.quick-actions h2 {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.action-btn {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.action-btn:hover {
+    background: #4CAF50;
+    border-color: #4CAF50;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
+}
+
+.action-btn i {
+    font-size: 24px;
+}
+
+/* Footer */
+.main-footer {
+    background: #1a1a1a;
+    border-top: 1px solid #333;
+    padding: 24px 32px;
+    text-align: center;
+    color: #888;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px 20px;
+    }
+    
+    .main-nav {
+        gap: 16px;
+    }
+    
+    .main-content {
+        padding: 32px 20px;
+    }
+    
+    .welcome-section h1 {
+        font-size: 36px;
+    }
+    
+    .welcome-section p {
+        font-size: 18px;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .main-nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .welcome-section h1 {
+        font-size: 28px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card,
+.action-btn {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
